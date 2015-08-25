@@ -12,8 +12,12 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         InputCollector *newInput = [[InputCollector alloc] init];
-        NSString *menuSelection = [newInput inputForPrompt:@"What would you like do next?/n new - Create a new contact/n list - List all contacts/n quit - Exit Application"];
+        NSString *menuSelection = [newInput inputForPrompt:@"What would you like do next?\n new - Create a new contact\n list - List all contacts\n quit - Exit Application"];
         NSLog(@"%@", menuSelection);
+        
+        if ([menuSelection isEqualTo:@"quit\n"]) {
+            NSLog(@"So long!");
+        }
     }
     return 0;
 }
