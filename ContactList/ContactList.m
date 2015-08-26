@@ -20,9 +20,16 @@
     }
 }
 
+
 -(void)addContact:(Contact *)newContact {
     [self.contacts addObject:newContact];
 }
 
+
+-(void)printContactList {
+    for (Contact *contact in self.contacts) {
+        NSLog(@"%lu:%@\n", (unsigned long)[self.contacts indexOfObject:contact], contact.contactName);
+    }
+}
 
 @end

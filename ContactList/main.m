@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
         ContactList *newList = [[ContactList alloc] init];
         
         while (newInput) {
-            NSString *menuSelection = [newInput inputForPrompt:@"What would you like do next?\n new - Create a new contact\n list - List all contacts\n quit - Exit Application"];
+            NSString *menuSelection = [newInput inputForPrompt:@"What would you like do next?\n new - Create a new contact\n list - List all contacts\n show - Show the name and email for a specified contact ID\n quit - Exit Application"];
             
             if ([menuSelection isEqualTo:@"quit\n"]) {
                 NSLog(@"So long!");
@@ -29,9 +29,17 @@ int main(int argc, const char * argv[]) {
                 newContact.contactEmail = [newInput inputForPrompt:@"What is your new contact's email address?"];
                 [newList addContact:newContact];
             }
-
+            else if ([menuSelection isEqualTo:@"list\n"]) {
+                [newList printContactList];
+            }
+            else if ([menuSelection isEqualTo:@"show\n"]) {
+                NSString *stringContactIndex = [newInput inputForPrompt:@"What is the ID of the contact you would like to show?"];
+                NSString *trimmedString = [stringContactIndex stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                int contactIndex = [trimmedString intValue];
+                Contact *aContact = [newList.contacts objectAtIndex:contactIndex];
+                NSLog(@"%@%@", aContact.contactName, aContact.contactEmail);
+            }
         }
-        
     }
     return 0;
 }
