@@ -7,6 +7,8 @@
 //
 
 #import "ContactList.h"
+#import "InputCollector.h"
+#import "Contact.h"
 
 @implementation ContactList
 

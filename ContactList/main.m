@@ -15,6 +15,7 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         InputCollector *newInput = [[InputCollector alloc] init];
         ContactList *newList = [[ContactList alloc] init];
+        BOOL duplicateFound = NO;
         
         while (newInput) {
             NSString *menuSelection = [newInput inputForPrompt:@"What would you like do next?\n new - Create a new contact\n list - List all contacts\n show - Show the name and email for a specified contact ID\n find - Find a contact using a specified search term\n quit - Exit Application"];
@@ -24,10 +25,29 @@ int main(int argc, const char * argv[]) {
                 return 0;
             }
             else if ([menuSelection isEqualTo:@"new\n"]) {
+                
                 Contact *newContact = [[Contact alloc] init];
-                newContact.contactName = [newInput inputForPrompt:@"What is the name of your new contact?"];
-                newContact.contactEmail = [newInput inputForPrompt:@"What is your new contact's email address?"];
                 [newList addContact:newContact];
+                newContact.contactEmail = [newInput inputForPrompt:@"What is your new contact's email address?"];
+                
+                if (duplicateFound == NO) {
+                    newContact.contactName = [newInput inputForPrompt:@"What is the name of your new contact?"];
+                    [newList addContact:newContact];
+                    duplicateFound = YES;
+                }
+                else {
+                    for (Contact *contact in newList.contacts) {
+                        
+                        if ([contact.contactEmail isEqualToString:newContact.contactEmail]) {
+                            NSLog(@"Contact already exists");
+                            break;
+                        }
+                        else {
+                            newContact.contactName = [newInput inputForPrompt:@"What is the name of your new contact?"];
+                            [newList addContact:newContact];
+                        }
+                    }
+                }
             }
             else if ([menuSelection isEqualTo:@"list\n"]) {
                 [newList printContactList];
