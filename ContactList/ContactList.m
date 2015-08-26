@@ -32,4 +32,19 @@
     }
 }
 
+
+-(void)searchForContact:(NSString *)searchTerm {
+    for (Contact *contact in self.contacts) {
+        if ([contact.contactName rangeOfString:searchTerm].location != NSNotFound) {
+            NSLog(@"%@%@", contact.contactName, contact.contactEmail);
+        }
+        else if ([contact.contactEmail rangeOfString:searchTerm].location != NSNotFound) {
+            NSLog(@"%@%@", contact.contactName, contact.contactEmail);
+        }
+        else {
+            NSLog(@"No results found");
+        }
+    }
+}
+
 @end

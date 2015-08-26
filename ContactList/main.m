@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
         ContactList *newList = [[ContactList alloc] init];
         
         while (newInput) {
-            NSString *menuSelection = [newInput inputForPrompt:@"What would you like do next?\n new - Create a new contact\n list - List all contacts\n show - Show the name and email for a specified contact ID\n quit - Exit Application"];
+            NSString *menuSelection = [newInput inputForPrompt:@"What would you like do next?\n new - Create a new contact\n list - List all contacts\n show - Show the name and email for a specified contact ID\n find - Find a contact using a specified search term\n quit - Exit Application"];
             
             if ([menuSelection isEqualTo:@"quit\n"]) {
                 NSLog(@"So long!");
@@ -39,6 +39,12 @@ int main(int argc, const char * argv[]) {
                 Contact *aContact = [newList.contacts objectAtIndex:contactIndex];
                 NSLog(@"%@%@", aContact.contactName, aContact.contactEmail);
             }
+            else if ([menuSelection isEqualTo:@"find\n"]) {
+                NSString *searchTerm = [newInput inputForPrompt:@"What term would you like to search for?"];
+                NSString *trimmedSearchTerm = [searchTerm stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+                [newList searchForContact:trimmedSearchTerm];
+            }
+
         }
     }
     return 0;
