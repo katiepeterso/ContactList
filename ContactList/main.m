@@ -32,6 +32,7 @@ int main(int argc, const char * argv[]) {
                 
                 if (duplicateFound == NO) {
                     newContact.contactName = [newInput inputForPrompt:@"What is the name of your new contact?"];
+                    [newContact addPhoneNumbers];
                     [newList addContact:newContact];
                     duplicateFound = YES;
                 }

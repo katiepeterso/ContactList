@@ -12,5 +12,8 @@
 
 @property (nonatomic, strong) NSString *contactName;
 @property (nonatomic, strong) NSString *contactEmail;
+@property (nonatomic, strong) NSMutableDictionary *contactPhones;
+
+- (void)addPhoneNumbers;
 
 @end
