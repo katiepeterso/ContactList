@@ -2,7 +2,7 @@
 //  InputCollector.h
 //  ContactList
 //
-//  Created by Katherine Peterson on 2015-08-25.
+//  Created by Katherine Peterson on 2015-08-28.
 //  Copyright (c) 2015 KatieExpatriated. All rights reserved.
 //
 
@@ -10,6 +10,9 @@
 
 @interface InputCollector : NSObject
 
+@property (nonatomic) NSMutableArray *commandHistory;
+
 -(NSString *)inputForPrompt:(NSString *)promptString;
+-(void)printRecentCommandHistory;
 
 @end
